@@ -1,4 +1,4 @@
-use golang_type_decl::gen_json_struct_from_file;
+use golang_type_decl::{gen_json_struct_from_file, golang_type_decl_macro};
 
 gen_json_struct_from_file!("consul-1.9.5/api/catalog.go#L8-L11");
 

@@ -1,4 +1,4 @@
-use golang_type_decl::gen_json_struct_from_file;
+use golang_type_decl::{gen_json_struct_from_file, golang_type_decl_macro};
 
 use crate::proto::pbservice::service::{ExposeConfig, MeshGatewayConfig, Upstream};
 
