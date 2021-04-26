@@ -1,0 +1,18 @@
+[package]
+name = "consul-api"
+version = "0.1.0"
+authors = ["vkill <vkill.net@gmail.com>"]
+edition = "2018"
+
+build = false
+
+[dependencies]
+golang-type-decl = { version = "0.0", path = "../golang-rs/golang-type-decl/golang-type-decl" }
+golang-type-decl-macro = { version = "0.0", path = "../golang-rs/golang-type-decl/golang-type-decl-macro" }
+
+serde = { version = "1.0", default_features = false, features = ["std", "derive"] }
+
+protobuf = { version = "=3.0.0-pre", default-features = false, features = ["with-serde"], git = "https://github.com/stepancheg/rust-protobuf" }
+
+[build-dependencies]
+protoc-rust = { version = "=3.0.0-pre", git = "https://github.com/stepancheg/rust-protobuf" }
