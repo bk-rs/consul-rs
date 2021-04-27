@@ -10,6 +10,7 @@ build = false
 golang-type-decl = { version = "0.1", path = "../golang-rs/golang-type-decl/golang-type-decl" }
 
 serde = { version = "1.0", default_features = false, features = ["std", "derive"] }
+serde_json = { version = "1.0", default_features = false, features = ["std"] }
 
 protobuf = { version = "=3.0.0-pre", default-features = false, features = ["with-serde"], git = "https://github.com/stepancheg/rust-protobuf" }
 

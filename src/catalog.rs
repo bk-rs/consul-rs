@@ -1,5 +1,10 @@
 use golang_type_decl::{gen_json_struct_from_file, golang_type_decl_macro};
 
+use crate::{
+    agent::{AgentCheck, AgentService, AgentServiceConnectProxyConfig, ServiceKind},
+    health::HealthChecks,
+};
+
 gen_json_struct_from_file!("consul-1.9.5/api/catalog.go#L8-L11");
 
 gen_json_struct_from_file!("consul-1.9.5/api/catalog.go#L13-L22");
