@@ -4,6 +4,11 @@ use crate::ReadableDuration;
 
 gen_json_struct_from_file!("consul-1.9.5/api/health.go#L35-L52");
 
-gen_json_struct_from_file!("consul-1.9.5/api/health.go#L56-L71");
+gen_json_struct_from_file!(
+    "consul-1.9.5/api/health.go#L56-L71";
+    "IntervalDuration" => ReadableDuration,
+    "TimeoutDuration" => ReadableDuration,
+    "DeregisterCriticalServiceAfterDuration" => ReadableDuration,
+);
 
 pub type HealthChecks = Vec<HealthCheck>;
