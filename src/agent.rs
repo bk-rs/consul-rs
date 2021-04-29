@@ -20,7 +20,7 @@ gen_json_struct_from_file!("consul-1.9.5/api/agent.go#L76-L98");
 
 gen_json_struct_from_file!(
     "consul-1.9.5/api/agent.go#L108-L111";
-    "SidecarService" => Box<AgentServiceRegistration>
+    "SidecarService" => { "box_type": true }
 );
 
 gen_json_struct_from_file!(
