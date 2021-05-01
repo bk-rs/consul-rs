@@ -10,10 +10,12 @@ async fn datacenters() -> Result<(), Box<dyn error::Error>> {
 
     let client = get_client()?;
 
-    let mut endpoint = DatacentersEndpoint;
-    let res = client.respond_endpoint(&mut endpoint).await?;
+    let endpoint = DatacentersEndpoint;
+    let res = client.respond_endpoint(&endpoint).await?;
 
-    println!("res {:?}", res);
+    println!("datacenters {:?}", res);
+
+    assert_eq!(res, vec!["dc1"]);
 
     Ok(())
 }

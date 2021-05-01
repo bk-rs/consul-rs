@@ -29,7 +29,7 @@ pub trait Endpoint {
     }
 
     fn parse_response(
-        &mut self,
+        &self,
         response: Response<Body>,
     ) -> Result<Self::ResponseOkBody, EndpointParseResponseError> {
         let body = response.body();

@@ -32,13 +32,13 @@ where
 
     fn respond_endpoint<EP>(
         &'a self,
-        endpoint: &'a mut EP,
+        endpoint: &'a EP,
     ) -> BoxFuture<
         'async_trait,
         Result<<EP as Endpoint>::ResponseOkBody, ClientRespondEndpointError<Self::Error>>,
     >
     where
-        EP: Endpoint + Send,
+        EP: Endpoint + Send + Sync,
     {
         Box::pin(async move {
             let mut request = endpoint.render_request()?;
