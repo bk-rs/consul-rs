@@ -25,6 +25,7 @@ protoc-rust = { version = "=3.0.0-pre", git = "https://github.com/stepancheg/rus
 [dev-dependencies]
 tokio = { version = "1.5", features = ["macros", "rt"] }
 env_logger = { version = "0.8" }
+log = { version = "0.4" }
 
 [package.metadata.cargo-all-features]
 skip_feature_sets = [
