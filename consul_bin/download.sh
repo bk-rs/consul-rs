@@ -16,4 +16,4 @@ mkdir -p "${version_root_path}"
 rm -rf "${version_root_path}consul_${version}_linux_amd64.zip"
 wget -O "${version_root_path}consul_${version}_linux_amd64.zip" "https://releases.hashicorp.com/consul/${version}/consul_${version}_linux_amd64.zip"
 
-unzip "${version_root_path}consul_${version}_linux_amd64.zip" -d "${version_root_path}"
+unzip -o "${version_root_path}consul_${version}_linux_amd64.zip" -d "${version_root_path}"
