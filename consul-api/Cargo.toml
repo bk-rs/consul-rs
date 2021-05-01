@@ -6,6 +6,10 @@ edition = "2018"
 
 build = false
 
+[features]
+default = ["_integration_tests"]
+_integration_tests = []
+
 [dependencies]
 golang-type-decl = { version = "0.2" }
 # golang-type-decl = { version = "0.2", path = "../../golang-rs/golang-type-decl/golang-type-decl" }
@@ -17,3 +21,12 @@ protobuf = { version = "=3.0.0-pre", default-features = false, features = ["with
 
 [build-dependencies]
 protoc-rust = { version = "=3.0.0-pre", git = "https://github.com/stepancheg/rust-protobuf" }
+
+[dev-dependencies]
+tokio = { version = "1.5", features = ["macros", "rt"] }
+env_logger = { version = "0.8" }
+
+[package.metadata.cargo-all-features]
+skip_feature_sets = [
+    ["_integration_tests"],
+]
