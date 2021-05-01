@@ -1,6 +1,6 @@
 #[macro_export]
 macro_rules! endpoint {
-    ($name:ident, $method:expr, $path:literal, $body:ty) => {
+    ($name:ident, $body:ty, $method:expr, $path:literal, $(,)?) => {
         paste! {
             #[derive(Debug, Clone)]
             pub struct [<$name Endpoint>];

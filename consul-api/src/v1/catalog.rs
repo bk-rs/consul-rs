@@ -42,25 +42,25 @@ gen_json_struct_from_file!("consul-1.9.5/api/catalog.go#L93-L105");
 // https://github.com/hashicorp/consul/blob/v1.9.5/api/catalog.go#L150
 endpoint!(
     Datacenters,
+    gen_type!("[]string"),
     Method::GET,
     "/v1/catalog/datacenters",
-    gen_type!("[]string")
 );
 
 // Endpoint Nodes
 // https://github.com/hashicorp/consul/blob/v1.9.5/api/catalog.go#L166
 endpoint!(
     Nodes,
+    gen_type!("[]*Node"),
     Method::GET,
     "/v1/catalog/nodes",
-    gen_type!("[]*Node")
 );
 
 // Endpoint Nodes
 // https://github.com/hashicorp/consul/blob/v1.9.5/api/catalog.go#L187
 endpoint!(
     Services,
+    gen_type!("map[string][]string"),
     Method::GET,
     "/v1/catalog/services",
-    gen_type!("map[string][]string")
 );
