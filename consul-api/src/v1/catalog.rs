@@ -1,5 +1,7 @@
 use golang_type_decl::{gen_json_struct_from_file, golang_type_decl_macro};
 
+use crate::endpoint::{prelude::*, Endpoint};
+
 use super::{
     agent::{AgentCheck, AgentService, AgentServiceConnectProxyConfig, ServiceKind},
     health::HealthChecks,
@@ -34,3 +36,17 @@ gen_json_struct_from_file!("consul-1.9.5/api/catalog.go#L84-L89");
 
 // GatewayService
 gen_json_struct_from_file!("consul-1.9.5/api/catalog.go#L93-L105");
+
+// L150 Datacenters
+pub struct DatacentersEndpoint;
+impl Endpoint for DatacentersEndpoint {
+    type ResponseOkBody = Vec<String>;
+
+    fn method(&self) -> Method {
+        Method::GET
+    }
+
+    fn path(&self) -> String {
+        "/v1/catalog/datacenters".to_owned()
+    }
+}
