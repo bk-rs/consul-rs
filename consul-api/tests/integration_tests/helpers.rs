@@ -5,11 +5,9 @@ use log::debug;
 
 pub(super) fn get_client() -> Result<IsahcClient, Box<dyn error::Error>> {
     let url = env::var("CONSUL_HTTP_URL")?;
-
     debug!("CONSUL_HTTP_URL {}", url);
 
     let mut client = IsahcClient::new().unwrap();
-
     client.set_base_url(url);
 
     Ok(client)
