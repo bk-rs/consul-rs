@@ -2,7 +2,7 @@
 
 set -ex
 
-# ./download_source_code_v1_9_5.sh
+# ./download_source_code_1_9_5.sh
 
 script_path=$(cd $(dirname $0) ; pwd -P)
 script_path_root="${script_path}/"

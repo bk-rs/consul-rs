@@ -6,5 +6,5 @@
 ## Dev
 
 ```
-./download_source_code_v1_9_5.sh
+./download_source_code_1_9_5.sh
 ```
