@@ -45,5 +45,6 @@ log = { version = "0.4" }
 
 [package.metadata.cargo-all-features]
 skip_feature_sets = [
+    ["isahc"],
     ["_integration_tests"],
 ]
