@@ -13,7 +13,7 @@ async fn datacenters() -> Result<(), Box<dyn error::Error>> {
 
     let client = get_client()?;
 
-    let endpoint = DatacentersEndpoint;
+    let endpoint = DatacentersEndpoint::new();
     let res = client.respond_endpoint(&endpoint).await?;
 
     println!("datacenters {:?}", res);
@@ -29,7 +29,7 @@ async fn nodes() -> Result<(), Box<dyn error::Error>> {
 
     let client = get_client()?;
 
-    let endpoint = NodesEndpoint;
+    let endpoint = NodesEndpoint::new();
     let res = client.respond_endpoint(&endpoint).await?;
 
     println!("nodes {:?}", res);
@@ -43,7 +43,7 @@ async fn services() -> Result<(), Box<dyn error::Error>> {
 
     let client = get_client()?;
 
-    let endpoint = ServicesEndpoint;
+    let endpoint = ServicesEndpoint::new();
     let res = client.respond_endpoint(&endpoint).await?;
 
     println!("services {:?}", res);
