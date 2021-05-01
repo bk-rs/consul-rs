@@ -1,3 +1,4 @@
+#[macro_export]
 macro_rules! endpoint {
     ($name:ident, $method:expr, $path:literal, $body:ty) => {
         paste! {
