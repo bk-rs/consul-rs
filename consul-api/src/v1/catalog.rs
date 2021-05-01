@@ -1,6 +1,7 @@
+use golang_type::{gen_type, golang_type_macro};
 use golang_type_decl::{gen_json_struct_from_file, golang_type_decl_macro};
 
-use crate::endpoint::{prelude::*, Endpoint};
+use crate::endpoint::http::Method;
 
 use super::{
     agent::{AgentCheck, AgentService, AgentServiceConnectProxyConfig, ServiceKind},
@@ -37,16 +38,29 @@ gen_json_struct_from_file!("consul-1.9.5/api/catalog.go#L84-L89");
 // GatewayService
 gen_json_struct_from_file!("consul-1.9.5/api/catalog.go#L93-L105");
 
-// L150 Datacenters
-pub struct DatacentersEndpoint;
-impl Endpoint for DatacentersEndpoint {
-    type ResponseOkBody = Vec<String>;
+// Endpoint Datacenters
+// https://github.com/hashicorp/consul/blob/v1.9.5/api/catalog.go#L150
+endpoint!(
+    Datacenters,
+    Method::GET,
+    "/v1/catalog/datacenters",
+    gen_type!("[]string")
+);
 
-    fn method(&self) -> Method {
-        Method::GET
-    }
+// Endpoint Nodes
+// https://github.com/hashicorp/consul/blob/v1.9.5/api/catalog.go#L166
+endpoint!(
+    Nodes,
+    Method::GET,
+    "/v1/catalog/nodes",
+    gen_type!("[]*Node")
+);
 
-    fn path(&self) -> String {
-        "/v1/catalog/datacenters".to_owned()
-    }
-}
+// Endpoint Nodes
+// https://github.com/hashicorp/consul/blob/v1.9.5/api/catalog.go#L187
+endpoint!(
+    Services,
+    Method::GET,
+    "/v1/catalog/services",
+    gen_type!("map[string][]string")
+);

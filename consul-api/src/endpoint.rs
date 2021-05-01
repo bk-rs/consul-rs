@@ -1,13 +1,9 @@
+pub use http::{self, Request, Response};
 use http::{header::ACCEPT, Method, Uri, Version};
-pub use http::{Request, Response};
 use serde::de::DeserializeOwned;
 use serde_json::Value;
 
 pub type Body = Vec<u8>;
-
-pub mod prelude {
-    pub use http::Method;
-}
 
 pub trait Endpoint {
     type ResponseOkBody: DeserializeOwned;
