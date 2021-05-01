@@ -54,10 +54,18 @@ impl fmt::Display for State {
 
 // Endpoint State
 // https://github.com/hashicorp/consul/blob/v1.9.5/api/health.go#L349
+// https://www.consul.io/api-docs/health#list-checks-in-state
 endpoint!(
     State,
+    ListChecksInState,
     gen_type!("HealthChecks"),
     Method::GET,
     "/v1/health/state/{state}",
-    state = State,
+    state => State,
+    ;
+    dc = String,
+    near = String,
+    node_meta = String,
+    filter = String,
+    ns = String,
 );

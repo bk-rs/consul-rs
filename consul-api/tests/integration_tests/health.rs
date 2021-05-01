@@ -1,7 +1,7 @@
 use std::error;
 
 use consul_api::{
-    v1::health::{State, StateEndpoint},
+    v1::health::{ListChecksInState, State},
     Client as _,
 };
 
@@ -13,7 +13,8 @@ async fn state() -> Result<(), Box<dyn error::Error>> {
 
     let client = get_client()?;
 
-    let endpoint = StateEndpoint::new(State::Any);
+    let mut endpoint = ListChecksInState::new(State::Any);
+    endpoint.set_ns("dc1".to_owned());
     let res = client.respond_endpoint(&endpoint).await?;
 
     println!("state {:?}", res);
