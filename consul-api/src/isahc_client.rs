@@ -31,10 +31,8 @@ impl IsahcClient {
         }
     }
 
-    pub fn base_url(&mut self, val: impl Into<String>) -> &mut Self {
-        self.base_url = Some(val.into());
-
-        self
+    pub fn set_base_url(&mut self, v: impl Into<String>) {
+        self.base_url = Some(v.into());
     }
 }
 

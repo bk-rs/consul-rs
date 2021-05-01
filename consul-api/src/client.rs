@@ -6,6 +6,8 @@ use url::Url;
 pub use crate::endpoint::{Body, Request, Response};
 use crate::endpoint::{Endpoint, EndpointParseResponseError, EndpointRenderRequestError};
 
+const BASE_URL_DEFAULT: &str = "http://127.0.0.1:8500";
+
 pub trait Client<'a, 'async_trait>
 where
     'a: 'async_trait,
@@ -17,9 +19,10 @@ where
         None
     }
 
-    fn update_request(&self, request: Request<Body>) -> Result<Request<Body>, String> {
+    fn respond_before(&self, request: Request<Body>) -> Result<Request<Body>, String> {
         Ok(request)
     }
+    fn respond_after(&self, _response: &Response<Body>) {}
 
     //
     fn respond(
@@ -44,7 +47,7 @@ where
 
             let url: Url = self
                 .base_url()
-                .unwrap_or_else(|| "http://127.0.0.1:8500".to_owned())
+                .unwrap_or_else(|| BASE_URL_DEFAULT.to_owned())
                 .parse()?;
             let mut url = url.join(uri.path())?;
             url.set_query(uri.query());
@@ -52,13 +55,15 @@ where
             *request.uri_mut() = url.as_str().parse()?;
 
             let request = self
-                .update_request(request)
+                .respond_before(request)
                 .map_err(ClientRespondEndpointError::UpdateRequestFailed)?;
 
             let response = self
                 .respond(request)
                 .await
                 .map_err(ClientRespondEndpointError::RespondError)?;
+
+            self.respond_after(&response);
 
             let response = endpoint.parse_response(response)?;
 
