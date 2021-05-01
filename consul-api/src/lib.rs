@@ -1,7 +1,7 @@
 #[macro_use]
 extern crate paste;
 #[macro_use]
-pub(crate) mod endpoint_macros;
+mod endpoint_macros;
 
 #[cfg(feature = "with-isahc")]
 pub use isahc;
