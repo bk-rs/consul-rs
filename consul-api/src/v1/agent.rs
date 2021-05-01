@@ -5,7 +5,7 @@ use golang_type_decl::{
 };
 use serde_json::Value;
 
-use crate::{
+use super::{
     catalog::ServiceAddress,
     health::HealthCheckDefinition,
     proto::pbservice::service::{ExposeConfig, MeshGatewayConfig, Upstream},

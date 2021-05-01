@@ -1,6 +1,6 @@
 use golang_type_decl::{gen_json_struct_from_file, golang_type_decl_macro};
 
-use crate::{
+use super::{
     agent::{AgentCheck, AgentService, AgentServiceConnectProxyConfig, ServiceKind},
     health::HealthChecks,
 };
