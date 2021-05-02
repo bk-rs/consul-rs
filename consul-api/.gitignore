@@ -8,6 +8,7 @@
 !/consul-1.9.5/api
 /consul-1.9.5/api/*
 !/consul-1.9.5/api/agent.go
+!/consul-1.9.5/api/api.go
 !/consul-1.9.5/api/catalog.go
 !/consul-1.9.5/api/health.go
 !/consul-1.9.5/api/operator_autopilot.go
