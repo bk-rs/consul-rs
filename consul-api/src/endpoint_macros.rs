@@ -12,17 +12,17 @@ macro_rules! endpoint {
         paste! {
             #[derive(Debug, Clone)]
             pub struct [<$name Endpoint>] {
-                params: Vec<(String, String)>,
+                params: std::collections::HashMap<String, serde_json::Value>,
             }
             pub type $alias = [<$name Endpoint>];
             impl [<$name Endpoint>] {
                 pub fn new() -> Self {
-                    Self { params: vec![] }
+                    Self { params: Default::default() }
                 }
 
                 $(
                     pub fn [<set_ $param_k>](&mut self, val: $param_type) {
-                        self.params.push((stringify!($param_k).to_string(), val.to_string()));
+                        *self.params.entry(stringify!($param_k).to_string()).or_default() = val.into();
                     }
                 )*
             }
@@ -58,17 +58,17 @@ macro_rules! endpoint {
             #[derive(Debug, Clone)]
             pub struct [<$name Endpoint>] {
                 $( $path_param_k: $path_param_v,)*
-                params: Vec<(String, String)>,
+                params: std::collections::HashMap<String, serde_json::Value>,
             }
             pub type $alias = [<$name Endpoint>];
             impl [<$name Endpoint>] {
                 pub fn new($( $path_param_k: $path_param_v,)*) -> Self {
-                    Self {$( $path_param_k,)* params: vec![]}
+                    Self {$( $path_param_k,)* params: Default::default()}
                 }
 
                 $(
                     pub fn [<set_ $param_k>](&mut self, val: $param_type) {
-                        self.params.push((stringify!($param_k).to_string(), val.to_string()));
+                        *self.params.entry(stringify!($param_k).to_string()).or_default() = val.into();
                     }
                 )*
             }

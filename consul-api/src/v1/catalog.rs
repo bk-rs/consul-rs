@@ -1,5 +1,6 @@
 use golang_type::{gen_type, golang_type_macro};
 use golang_type_decl::{gen_json_struct_from_file, golang_type_decl_macro};
+use serde_json::{Map, Value};
 
 use crate::endpoint::http::Method;
 
@@ -75,6 +76,6 @@ endpoint!(
     "/v1/catalog/services",
     ;
     dc = String,
-    node_meta = String,
+    node_meta = Map<String, Value>,
     ns = String,
 );

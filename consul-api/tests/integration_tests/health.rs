@@ -4,6 +4,7 @@ use consul_api::{
     v1::health::{ListChecksInState, State},
     Client as _,
 };
+use serde_json::Map;
 
 use super::helpers::{get_client, init_logger};
 
@@ -15,6 +16,9 @@ async fn state() -> Result<(), Box<dyn error::Error>> {
 
     let mut endpoint = ListChecksInState::new(State::Any);
     endpoint.set_ns("dc1".to_owned());
+    let mut node_meta = Map::new();
+    node_meta.insert("k".to_owned(), "v".into());
+    endpoint.set_node_meta(node_meta);
     let res = client.respond_endpoint(&endpoint).await?;
 
     println!("state {:?}", res);
