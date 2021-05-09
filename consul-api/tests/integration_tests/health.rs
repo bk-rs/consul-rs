@@ -1,7 +1,7 @@
 use std::error;
 
 use consul_api::{
-    v1::health::{ListChecksInState, State},
+    api::health::{ListChecksInState, State},
     Client as _,
 };
 use serde_json::Map;

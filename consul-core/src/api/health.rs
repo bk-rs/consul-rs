@@ -1,12 +1,9 @@
 use std::fmt;
 
-use golang_type::{gen_type, golang_type_macro};
 use golang_type_decl::{
     gen_json_struct_from_file, gen_type_alias_from_file, golang_type_decl_macro,
 };
-use serde_json::{Map, Value};
-
-use crate::endpoint::http::Method;
+use serde_json::Value;
 
 use super::operator_autopilot::ReadableDuration;
 
@@ -51,21 +48,3 @@ impl fmt::Display for State {
         }
     }
 }
-
-// Endpoint State
-// https://github.com/hashicorp/consul/blob/v1.9.5/api/health.go#L349
-// https://www.consul.io/api-docs/health#list-checks-in-state
-endpoint!(
-    State,
-    ListChecksInState,
-    gen_type!("HealthChecks"),
-    Method::GET,
-    "/v1/health/state/{state}",
-    state => State,
-    ;
-    dc = String,
-    near = String,
-    node_meta = Map<String, Value>,
-    filter = String,
-    ns = String,
-);

@@ -1,10 +1,9 @@
 use std::fmt;
 
+pub use consul_api_endpoint::{Body, Request, Response};
+use consul_api_endpoint::{Endpoint, EndpointParseResponseError, EndpointRenderRequestError};
 use futures_core::future::BoxFuture;
 use url::Url;
-
-pub use crate::endpoint::{Body, Request, Response};
-use crate::endpoint::{Endpoint, EndpointParseResponseError, EndpointRenderRequestError};
 
 const BASE_URL_DEFAULT: &str = "http://127.0.0.1:8500";
 

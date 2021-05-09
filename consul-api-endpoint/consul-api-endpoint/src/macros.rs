@@ -31,10 +31,10 @@ macro_rules! endpoint {
                     Self::new()
                 }
             }
-            impl crate::endpoint::Endpoint for [<$name Endpoint>] {
+            impl consul_api_endpoint_core::Endpoint for [<$name Endpoint>] {
                 type ResponseOkBody = $res_ok_body;
 
-                fn method(&self) -> crate::endpoint::http::Method {
+                fn method(&self) -> ::http::Method {
                     $method
                 }
 
@@ -72,10 +72,10 @@ macro_rules! endpoint {
                     }
                 )*
             }
-            impl crate::endpoint::Endpoint for [<$name Endpoint>] {
+            impl consul_api_endpoint_core::Endpoint for [<$name Endpoint>] {
                 type ResponseOkBody = $res_ok_body;
 
-                fn method(&self) -> crate::endpoint::http::Method {
+                fn method(&self) -> ::http::Method {
                     $method
                 }
 

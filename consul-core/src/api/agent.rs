@@ -5,11 +5,9 @@ use golang_type_decl::{
 };
 use serde_json::Value;
 
-use super::{
-    catalog::ServiceAddress,
-    health::HealthCheckDefinition,
-    proto::pbservice::service::{ExposeConfig, MeshGatewayConfig, Upstream},
-};
+use crate::proto::pbservice::service::{ExposeConfig, MeshGatewayConfig, Upstream};
+
+use super::{catalog::ServiceAddress, health::HealthCheckDefinition};
 
 // ServiceKind
 gen_type_alias_from_file!("consul-1.9.5/api/agent.go#L13");

@@ -1,0 +1,9 @@
+[package]
+name = "consul-api-endpoint"
+version = "0.0.0"
+authors = ["vkill <vkill.net@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+consul-api-endpoint-core = { version = "=0.0.0", path = "../consul-api-endpoint-core" }
+consul-api-endpoint-macro = { version = "=0.0.0", path = "../consul-api-endpoint-macro" }

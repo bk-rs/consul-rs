@@ -1,4 +1,8 @@
 [workspace]
 members = [
     "consul-api",
+    "consul-api-endpoint/consul-api-endpoint",
+    "consul-api-endpoint/consul-api-endpoint-core",
+    "consul-api-endpoint/consul-api-endpoint-macro",
+    "consul-core",
 ]

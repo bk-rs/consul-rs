@@ -1,7 +1,7 @@
 use std::error;
 
 use consul_api::{
-    v1::catalog::{DatacentersEndpoint, NodesEndpoint, ServicesEndpoint},
+    api::catalog::{DatacentersEndpoint, NodesEndpoint, ServicesEndpoint},
     Client as _,
 };
 
