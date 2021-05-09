@@ -32,9 +32,6 @@ serde_json = { version = "1.0", default_features = false, features = ["std"] }
 
 isahc = { version = "1.3", default-features = false, optional = true }
 
-[build-dependencies]
-protoc-rust = { version = "=3.0.0-pre", git = "https://github.com/stepancheg/rust-protobuf" }
-
 [dev-dependencies]
 tokio = { version = "1.5", features = ["macros", "rt"] }
 env_logger = { version = "0.8" }

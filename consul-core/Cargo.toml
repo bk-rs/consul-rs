@@ -14,3 +14,6 @@ serde = { version = "1.0", default_features = false, features = ["std", "derive"
 serde_json = { version = "1.0", default_features = false, features = ["std"] }
 
 protobuf = { version = "=3.0.0-pre", default-features = false, features = ["with-serde"], git = "https://github.com/stepancheg/rust-protobuf" }
+
+[build-dependencies]
+protoc-rust = { version = "=3.0.0-pre", git = "https://github.com/stepancheg/rust-protobuf" }
