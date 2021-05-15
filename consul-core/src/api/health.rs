@@ -5,7 +5,7 @@ use golang_type_decl::{
 };
 use serde_json::Value;
 
-use super::operator_autopilot::ReadableDuration;
+use super::{api::TimeDuration, operator_autopilot::ReadableDuration};
 
 // HealthCheck
 gen_json_struct_from_file!(
@@ -17,9 +17,9 @@ gen_json_struct_from_file!(
 // HealthCheckDefinition
 gen_json_struct_from_file!(
     "consul-1.9.5/api/health.go#L56-L71";
-    "IntervalDuration" => ReadableDuration,
-    "TimeoutDuration" => ReadableDuration,
-    "DeregisterCriticalServiceAfterDuration" => ReadableDuration,
+    "IntervalDuration" => TimeDuration,
+    "TimeoutDuration" => TimeDuration,
+    "DeregisterCriticalServiceAfterDuration" => TimeDuration,
 );
 
 // HealthChecks

@@ -8,7 +8,7 @@ build = false
 
 [dependencies]
 golang-type-decl = { version = "0.2" }
-# golang-type-decl = { version = "0.2", path = "../../golang-rs/golang-type-decl/golang-type-decl" }
+golang-type = { version = "0.1" }
 
 serde = { version = "1.0", default_features = false, features = ["std", "derive"] }
 serde_json = { version = "1.0", default_features = false, features = ["std"] }
