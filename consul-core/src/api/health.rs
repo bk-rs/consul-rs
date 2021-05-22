@@ -9,14 +9,18 @@ use super::{api::TimeDuration, operator_autopilot::ReadableDuration};
 
 // HealthCheck
 gen_json_struct_from_file!(
-    "consul-1.9.5/api/health.go#L35-L52";
+    "consul-1.9.5/api/health.go#L35-L52",
+    custom_derive = "Debug, Clone",
+    ;
     // TODO, {"Definition": {}}
     "Definition" => Value,
 );
 
 // HealthCheckDefinition
 gen_json_struct_from_file!(
-    "consul-1.9.5/api/health.go#L56-L71";
+    "consul-1.9.5/api/health.go#L56-L71",
+    custom_derive = "Debug, Clone",
+    ;
     "IntervalDuration" => TimeDuration,
     "TimeoutDuration" => TimeDuration,
     "DeregisterCriticalServiceAfterDuration" => TimeDuration,

@@ -13,31 +13,50 @@ use super::{catalog::ServiceAddress, health::HealthCheckDefinition};
 gen_type_alias_from_file!("consul-1.9.5/api/agent.go#L13");
 
 // AgentCheck
-gen_json_struct_from_file!("consul-1.9.5/api/agent.go#L55-L67");
+gen_json_struct_from_file!(
+    "consul-1.9.5/api/agent.go#L55-L67",
+    custom_derive = "Debug, Clone"
+);
 
 // AgentWeights
-gen_json_struct_from_file!("consul-1.9.5/api/agent.go#L70-L73");
+gen_json_struct_from_file!(
+    "consul-1.9.5/api/agent.go#L70-L73",
+    custom_derive = "Debug, Clone"
+);
 
 // AgentService
-gen_json_struct_from_file!("consul-1.9.5/api/agent.go#L76-L98");
+gen_json_struct_from_file!(
+    "consul-1.9.5/api/agent.go#L76-L98",
+    custom_derive = "Debug, Clone"
+);
 
 // AgentServiceConnect
 gen_json_struct_from_file!(
-    "consul-1.9.5/api/agent.go#L108-L111";
+    "consul-1.9.5/api/agent.go#L108-L111",
+    custom_derive = "Debug, Clone",
+    ;
     "SidecarService" => { "box_type": true }
 );
 
 // AgentServiceConnectProxyConfig
 gen_json_struct_from_file!(
-    "consul-1.9.5/api/agent.go#L115-L124";
+    "consul-1.9.5/api/agent.go#L115-L124",
+    custom_derive = "Debug, Clone",
+    ;
     "Config" => HashMap<String, Value>
 );
 
 // AgentServiceRegistration
-gen_json_struct_from_file!("consul-1.9.5/api/agent.go#L251-L267");
+gen_json_struct_from_file!(
+    "consul-1.9.5/api/agent.go#L251-L267",
+    custom_derive = "Debug, Clone"
+);
 
 // AgentServiceCheck
-gen_json_struct_from_file!("consul-1.9.5/api/agent.go#L288-L319");
+gen_json_struct_from_file!(
+    "consul-1.9.5/api/agent.go#L288-L319",
+    custom_derive = "Debug, Clone"
+);
 
 // AgentServiceChecks
 gen_type_alias_from_file!("consul-1.9.5/api/agent.go#L320");
