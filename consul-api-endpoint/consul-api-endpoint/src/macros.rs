@@ -32,6 +32,7 @@ macro_rules! endpoint {
                 }
             }
             impl consul_api_endpoint_core::Endpoint for [<$name Endpoint>] {
+                type RequestBody = ();
                 type ResponseOkBody = $res_ok_body;
 
                 fn method(&self) -> ::http::Method {
@@ -73,6 +74,7 @@ macro_rules! endpoint {
                 )*
             }
             impl consul_api_endpoint_core::Endpoint for [<$name Endpoint>] {
+                type RequestBody = ();
                 type ResponseOkBody = $res_ok_body;
 
                 fn method(&self) -> ::http::Method {
