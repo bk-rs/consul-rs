@@ -1,6 +1,6 @@
 [package]
 name = "consul-api"
-version = "0.1.0"
+version = "0.0.0"
 authors = ["vkill <vkill.net@gmail.com>"]
 edition = "2018"
 
@@ -11,11 +11,10 @@ features = ["with-isahc"]
 
 [features]
 # default = ["with-isahc"]
-default = ["with-isahc", "_integration_tests"]
 
 with-isahc = ["isahc"]
 
-_integration_tests = []
+_integration_tests = ["with-isahc"]
 
 [dependencies]
 consul-core = { version = "=0.0.0", path = "../consul-core" }
