@@ -13,9 +13,9 @@ use serde_json::Value;
 pub type Body = Vec<u8>;
 const URL_PERCENT_ENCODE_ASCII_SET: &AsciiSet = &NON_ALPHANUMERIC.remove(b':');
 
-#[cfg(feature = "with-derive")]
+#[cfg(feature = "with-macro")]
 mod macros;
-#[cfg(feature = "with-derive")]
+#[cfg(feature = "with-macro")]
 pub use macros::*;
 
 pub trait Endpoint {

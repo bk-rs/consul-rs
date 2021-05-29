@@ -5,7 +5,7 @@ authors = ["vkill <vkill.net@gmail.com>"]
 edition = "2018"
 
 [features]
-with-derive = ["consul-api-endpoint-macro"]
+with-macro = ["consul-api-endpoint-macro"]
 
 [dependencies]
 consul-api-endpoint-macro = { version = "=0.0.0", path = "../consul-api-endpoint-macro", optional = true }

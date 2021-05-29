@@ -18,7 +18,7 @@ _integration_tests = ["with-isahc"]
 
 [dependencies]
 consul-core = { version = "=0.0.0", path = "../consul-core" }
-consul-api-endpoint = { version = "=0.0.0", path = "../consul-api-endpoint/consul-api-endpoint", features = ["with-derive"] }
+consul-api-endpoint = { version = "=0.0.0", path = "../consul-api-endpoint/consul-api-endpoint", features = ["with-macro"] }
 
 golang-type = { version = "0.1" }
 paste = { version = "1.0", default-features = false }
