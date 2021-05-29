@@ -1,4 +1,4 @@
-use std::{collections::HashMap, time::Duration};
+use std::{collections::BTreeMap, time::Duration};
 
 use golang_type::{gen_type, golang_type_macro};
 use golang_type_decl::{gen_json_struct_from_file, golang_type_decl_macro};
@@ -18,15 +18,15 @@ gen_json_struct_from_file!(
 pub type TimeDuration = gen_type!("int64");
 
 // https://golang.org/pkg/net/url/#Values
-pub type UrlValues = gen_type!("map[string][]string");
+pub type UrlValues = BTreeMap<String, Vec<String>>; // gen_type!("map[string][]string");
 
 // https://golang.org/pkg/net/http/#Header
-pub type HttpHeader = gen_type!("map[string][]string");
+pub type HttpHeader = BTreeMap<String, Vec<String>>; // gen_type!("map[string][]string");
 
 // https://github.com/hashicorp/consul/blob/v1.9.5/api/api.go#L686-L752
 impl QueryOptions {
     pub fn params(&self) -> UrlValues {
-        let mut params = HashMap::new();
+        let mut params = BTreeMap::new();
 
         if !self.namespace.is_empty() {
             params.insert("ns".to_owned(), vec![self.namespace.to_owned()]);
@@ -84,7 +84,7 @@ impl QueryOptions {
     }
 
     pub fn header(&self) -> HttpHeader {
-        let mut header = HashMap::new();
+        let mut header = BTreeMap::new();
 
         if !self.token.is_empty() {
             header.insert("X-Consul-Token".to_owned(), vec![self.token.to_owned()]);
