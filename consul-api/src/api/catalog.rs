@@ -1,4 +1,4 @@
-use consul_api_endpoint::{consul_api_endpoint_core, endpoint, http::Method};
+use consul_api_endpoint::{endpoint, http::Method};
 use consul_core::api::catalog::Node;
 use golang_type::{gen_type, golang_type_macro};
 use paste::paste;

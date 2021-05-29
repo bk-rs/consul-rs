@@ -4,6 +4,14 @@ version = "0.0.0"
 authors = ["vkill <vkill.net@gmail.com>"]
 edition = "2018"
 
+[features]
+with-derive = ["consul-api-endpoint-macro"]
+
 [dependencies]
-consul-api-endpoint-core = { version = "=0.0.0", path = "../consul-api-endpoint-core" }
-consul-api-endpoint-macro = { version = "=0.0.0", path = "../consul-api-endpoint-macro" }
+consul-api-endpoint-macro = { version = "=0.0.0", path = "../consul-api-endpoint-macro", optional = true }
+
+http = { version = "0.2", default-features = false }
+serde = { version = "1.0", default_features = false, features = ["std", "derive"] }
+serde_json = { version = "1.0", default_features = false, features = ["std"] }
+thiserror = { version = "1.0", default-features = false }
+percent-encoding = { version = "2.1", default-features = false }

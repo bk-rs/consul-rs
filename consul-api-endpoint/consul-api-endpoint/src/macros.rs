@@ -31,7 +31,7 @@ macro_rules! endpoint {
                     Self::new()
                 }
             }
-            impl consul_api_endpoint_core::Endpoint for [<$name Endpoint>] {
+            impl consul_api_endpoint::Endpoint for [<$name Endpoint>] {
                 type RequestBody = ();
                 type ResponseOkBody = $res_ok_body;
 
@@ -73,7 +73,7 @@ macro_rules! endpoint {
                     }
                 )*
             }
-            impl consul_api_endpoint_core::Endpoint for [<$name Endpoint>] {
+            impl consul_api_endpoint::Endpoint for [<$name Endpoint>] {
                 type RequestBody = ();
                 type ResponseOkBody = $res_ok_body;
 
