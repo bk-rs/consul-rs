@@ -107,6 +107,21 @@ impl QueryOptions {
 }
 
 // https://github.com/hashicorp/consul/blob/v1.9.5/api/api.go#L754-L764
-fn dur_to_msec(_dur: Duration) -> String {
-    unimplemented!()
+fn dur_to_msec(dur: Duration) -> String {
+    let mut ms = dur.as_millis();
+    if dur > Duration::new(0, 0) && ms == 0 {
+        ms = 1;
+    }
+    format!("{}ms", ms)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_dur_to_msec() {
+        assert_eq!(dur_to_msec(Duration::from_secs(1)), "1000ms");
+        assert_eq!(dur_to_msec(Duration::from_micros(1)), "1ms");
+    }
 }
