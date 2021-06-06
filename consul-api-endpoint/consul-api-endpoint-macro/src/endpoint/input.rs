@@ -33,7 +33,11 @@ impl Parse for Input {
 
             match key {
                 k if k == "name" => {
-                    name = input.parse::<LitStr>()?.value();
+                    let v = input.parse::<LitStr>()?;
+                    name = v.value();
+                    if name.is_empty() {
+                        return Err(SynError::new(v.span(), "name empty"));
+                    }
                     input.parse::<Token![,]>()?;
                 }
                 k if k == "method" => {
@@ -41,7 +45,11 @@ impl Parse for Input {
                     input.parse::<Token![,]>()?;
                 }
                 k if k == "path" => {
-                    path = input.parse::<LitStr>()?.value();
+                    let v = input.parse::<LitStr>()?;
+                    path = v.value();
+                    if path.is_empty() {
+                        return Err(SynError::new(v.span(), "path empty"));
+                    }
                     input.parse::<Token![,]>()?;
                 }
                 k if k == "path_params" => {
@@ -62,6 +70,13 @@ impl Parse for Input {
                 }
                 _ => {}
             }
+        }
+
+        if name.is_empty() {
+            return Err(SynError::new(input.span(), "name missing"));
+        }
+        if path.is_empty() {
+            return Err(SynError::new(input.span(), "path missing"));
         }
 
         Ok(Self {
