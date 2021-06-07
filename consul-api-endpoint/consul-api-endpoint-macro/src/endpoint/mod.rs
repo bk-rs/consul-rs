@@ -1,6 +1,7 @@
 use proc_macro2::TokenStream;
 
 mod input;
+mod output;
 mod path_params;
 mod query_option_names;
 

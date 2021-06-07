@@ -1,4 +1,5 @@
-use quote::format_ident;
+use proc_macro2::TokenStream;
+use quote::{format_ident, quote};
 use syn::{
     parse::{Parse, ParseStream},
     Error as SynError, Ident, LitStr, Token,
@@ -25,6 +26,29 @@ pub enum QueryOptionName {
     Connect,
     Filter,
 }
+impl QueryOptionName {
+    pub fn field(&self) -> (&str, TokenStream) {
+        match self {
+            QueryOptionName::Namespace => ("ns", quote!(::std::string::String)),
+            QueryOptionName::Datacenter => todo!(),
+            QueryOptionName::AllowStale => todo!(),
+            QueryOptionName::RequireConsistent => todo!(),
+            QueryOptionName::UseCache => todo!(),
+            QueryOptionName::MaxAge => todo!(),
+            QueryOptionName::StaleIfError => todo!(),
+            QueryOptionName::WaitIndex => todo!(),
+            QueryOptionName::WaitHash => todo!(),
+            QueryOptionName::WaitTime => todo!(),
+            QueryOptionName::Token => todo!(),
+            QueryOptionName::Near => todo!(),
+            QueryOptionName::NodeMeta => todo!(),
+            QueryOptionName::RelayFactor => todo!(),
+            QueryOptionName::LocalOnly => todo!(),
+            QueryOptionName::Connect => todo!(),
+            QueryOptionName::Filter => todo!(),
+        }
+    }
+}
 
 #[derive(Default)]
 pub struct QueryOptionNames(pub Vec<QueryOptionName>);
@@ -40,8 +64,8 @@ impl Parse for QueryOptionNames {
                 format_ident!("{}", input.parse::<LitStr>()?.value())
             };
             let name = match &query_option_name {
-                s if s == "namespace" || s == "ns" => QueryOptionName::Namespace,
-                s if s == "datacenter" || s == "dc" => QueryOptionName::Datacenter,
+                s if s == "ns" || s == "namespace" => QueryOptionName::Namespace,
+                s if s == "dc" || s == "datacenter" => QueryOptionName::Datacenter,
                 s if s == "stale" => QueryOptionName::AllowStale,
                 s if s == "consistent" => QueryOptionName::RequireConsistent,
                 s if s == "cached" => QueryOptionName::UseCache,
