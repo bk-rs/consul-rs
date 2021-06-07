@@ -1,27 +1,79 @@
+use quote::format_ident;
 use syn::{
     parse::{Parse, ParseStream},
-    Error as SynError, Ident, Token,
+    Error as SynError, Ident, LitStr, Token,
 };
 
+// https://github.com/hashicorp/consul/blob/v1.9.5/api/api.go#L80-L169
+#[derive(PartialEq, Eq, Debug)]
+pub enum QueryOptionName {
+    Namespace,
+    Datacenter,
+    AllowStale,
+    RequireConsistent,
+    UseCache,
+    MaxAge,
+    StaleIfError,
+    WaitIndex,
+    WaitHash,
+    WaitTime,
+    Token,
+    Near,
+    NodeMeta,
+    RelayFactor,
+    LocalOnly,
+    Connect,
+    Filter,
+}
+
 #[derive(Default)]
-pub struct QueryOptionNames(pub Vec<Ident>);
+pub struct QueryOptionNames(pub Vec<QueryOptionName>);
 
 impl Parse for QueryOptionNames {
     fn parse(input: ParseStream) -> Result<Self, SynError> {
         let mut inner = vec![];
 
         loop {
-            let query_option_name = input.parse::<Ident>()?;
+            let query_option_name = if input.peek(Ident) {
+                input.parse::<Ident>()?
+            } else {
+                format_ident!("{}", input.parse::<LitStr>()?.value())
+            };
+            let name = match &query_option_name {
+                s if s == "namespace" || s == "ns" => QueryOptionName::Namespace,
+                s if s == "datacenter" || s == "dc" => QueryOptionName::Datacenter,
+                s if s == "stale" => QueryOptionName::AllowStale,
+                s if s == "consistent" => QueryOptionName::RequireConsistent,
+                s if s == "cached" => QueryOptionName::UseCache,
+                s if s == "max-age" || s == "max_age" => QueryOptionName::MaxAge,
+                s if s == "stale-if-error" || s == "stale_if_error" => {
+                    QueryOptionName::StaleIfError
+                }
+                s if s == "index" => QueryOptionName::WaitIndex,
+                s if s == "wait" => QueryOptionName::WaitTime,
+                s if s == "hash" => QueryOptionName::WaitHash,
+                s if s == "token" => QueryOptionName::Token,
+                s if s == "near" => QueryOptionName::Near,
+                s if s == "node-meta" || s == "node_meta" => QueryOptionName::NodeMeta,
+                s if s == "relay-factor" || s == "relay_factor" => QueryOptionName::RelayFactor,
+                s if s == "local-only" || s == "local_only" => QueryOptionName::LocalOnly,
+                s if s == "connect" => QueryOptionName::Connect,
+                s if s == "filter" => QueryOptionName::Filter,
+                _ => {
+                    let err = format!("unknown query option name: {}", &query_option_name);
+                    return Err(SynError::new_spanned(query_option_name, err));
+                }
+            };
 
-            if inner.contains(&query_option_name) {
+            if inner.contains(&name) {
                 let err = format!("duplicate query option name: {}", &query_option_name);
                 return Err(SynError::new_spanned(query_option_name, err));
             }
-            inner.push(query_option_name);
+            inner.push(name);
 
             input.parse::<Token![,]>()?;
 
-            if !input.peek(Ident) {
+            if !(input.peek(Ident) || input.peek(LitStr)) {
                 break;
             }
         }

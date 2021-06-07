@@ -33,10 +33,9 @@ impl Parse for Input {
 
             match key {
                 k if k == "name" => {
-                    let v = input.parse::<LitStr>()?;
-                    name = v.value();
+                    name = input.parse::<LitStr>()?.value();
                     if name.is_empty() {
-                        return Err(SynError::new(v.span(), "name empty"));
+                        return Err(SynError::new(input.span(), "name empty"));
                     }
                     input.parse::<Token![,]>()?;
                 }
@@ -45,15 +44,23 @@ impl Parse for Input {
                     input.parse::<Token![,]>()?;
                 }
                 k if k == "path" => {
-                    let v = input.parse::<LitStr>()?;
-                    path = v.value();
+                    path = input.parse::<LitStr>()?.value();
                     if path.is_empty() {
-                        return Err(SynError::new(v.span(), "path empty"));
+                        return Err(SynError::new(input.span(), "path empty"));
                     }
                     input.parse::<Token![,]>()?;
                 }
                 k if k == "path_params" => {
-                    path_params = Some(input.parse()?);
+                    let v: PathParams = input.parse()?;
+                    for (path_param_name, _) in v.0.iter() {
+                        if !path.contains(format!("{{{}}}", path_param_name).as_str()) {
+                            return Err(SynError::new(
+                                input.span(),
+                                format!("path_params [{}] invalid", path_param_name),
+                            ));
+                        }
+                    }
+                    path_params = Some(v);
                     input.parse::<Token![,]>()?;
                 }
                 k if k == "query_option_names" => {
