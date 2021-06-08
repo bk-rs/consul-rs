@@ -157,6 +157,7 @@ impl ToTokens for ImplStructNewFunction {
             quote! {
                 pub fn new(#(#path_param_args)* body: #request_body) -> Self {
                     Self {
+                        query_options: Default::default(),
                         #(#path_param_names)*
                         body,
                     }
@@ -166,6 +167,7 @@ impl ToTokens for ImplStructNewFunction {
             quote! {
                 pub fn new(#(#path_param_args)*) -> Self {
                     Self {
+                        query_options: Default::default(),
                         #(#path_param_names)*
                     }
                 }
