@@ -30,6 +30,6 @@ endpoint!(
     ListServices,
     Method::GET,
     "/v1/catalog/services",
-    {dc, node_meta, filter, ns,},
+    { dc, node_meta, filter, ns, },
     gen_type!("map[string][]string"),
 );
