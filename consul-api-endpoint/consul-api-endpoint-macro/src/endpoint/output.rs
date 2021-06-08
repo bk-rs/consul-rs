@@ -46,7 +46,7 @@ struct DefStruct {
 }
 impl ToTokens for DefStruct {
     fn to_tokens(&self, tokens: &mut TokenStream) {
-        let name = &self.name;
+        let name = format_ident!("{}", &self.name);
         let path_param_fields: Vec<_> = if let Some(path_params) = &self.path_params {
             path_params
                 .0
@@ -71,7 +71,7 @@ impl ToTokens for DefStruct {
             quote! {
                 #derive
                 pub struct #name {
-                    query_options: ::consul_core::api::QueryOptions,
+                    query_options: ::consul_core::api::api::QueryOptions,
                     #(#path_param_fields)*
                     body: #request_body,
                 }
@@ -80,7 +80,7 @@ impl ToTokens for DefStruct {
             quote! {
                 #derive
                 pub struct #name {
-                    query_options: ::consul_core::api::QueryOptions,
+                    query_options: ::consul_core::api::api::QueryOptions,
                     #(#path_param_fields)*
                 }
             }
@@ -99,7 +99,7 @@ struct ImplStruct {
 }
 impl ToTokens for ImplStruct {
     fn to_tokens(&self, tokens: &mut TokenStream) {
-        let name = &self.name;
+        let name = format_ident!("{}", &self.name);
         let new_function = ImplStructNewFunction {
             path_params: self.path_params.to_owned(),
             request_body: self.request_body.to_owned(),
@@ -211,7 +211,7 @@ struct ImplTraitEndpoint {
 }
 impl ToTokens for ImplTraitEndpoint {
     fn to_tokens(&self, tokens: &mut TokenStream) {
-        let name = &self.name;
+        let name = format_ident!("{}", &self.name);
         let request_body_token_stream = if let Some(request_body) = &self.request_body {
             quote!(#request_body)
         } else {
@@ -245,11 +245,12 @@ impl ToTokens for ImplTraitEndpoint {
                     None
                 } else {
                     let mut header_map = ::http::header::HeaderMap::new();
-                    for (k, values) in map {
-                        for v in values {
-                            header_map.insert(k, v.parse().unwrap());
-                        }
-                    }
+                    // TODO
+                    // for (k, values) in map {
+                    //     for v in values {
+                    //         header_map.insert(k, v.parse().unwrap());
+                    //     }
+                    // }
                     Some(header_map)
                 }
             }
@@ -339,7 +340,7 @@ impl ToTokens for ImplTraitEndpointPathFunction {
         } else {
             quote! {
                 fn path(&self) -> String {
-                    #path
+                    #path.to_owned()
                 }
             }
         };

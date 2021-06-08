@@ -5,14 +5,13 @@ use paste::paste;
 use serde_json::{Map, Value};
 
 // Endpoint Datacenters
-// https://github.com/hashicorp/consul/blob/v1.9.5/api/catalog.go#L150
 // https://www.consul.io/api-docs/catalog#list-datacenters
+// https://github.com/hashicorp/consul/blob/v1.9.5/api/catalog.go#L150
 endpoint!(
-    Datacenters,
     ListDatacenters,
-    gen_type!("[]string"),
     Method::GET,
     "/v1/catalog/datacenters",
+    gen_type!("[]string")
 );
 
 // Endpoint Nodes

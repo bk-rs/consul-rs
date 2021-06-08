@@ -30,10 +30,9 @@ impl Parse for Input {
         while !input.is_empty() {
             let key = input.parse::<Ident>()?;
             input.parse::<Token![=]>()?;
-
             match key {
                 k if k == "name" => {
-                    name = input.parse::<LitStr>()?.value();
+                    name = input.parse::<Ident>()?.to_string();
                     if name.is_empty() {
                         return Err(SynError::new(input.span(), "name empty"));
                     }

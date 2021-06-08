@@ -2,6 +2,20 @@
 macro_rules! endpoint {
     (
         $name:ident,
+        $method:expr,
+        $path:literal,
+        $response_ok_body:ty $(,)?
+    ) => {
+        consul_api_endpoint_macro::endpoint!(
+            name = $name,
+            method = $method,
+            path = $path,
+            response_ok_body = $response_ok_body,
+        );
+    };
+
+    (
+        $name:ident,
         $alias:ident,
         $res_ok_body:ty,
         $method:expr,
