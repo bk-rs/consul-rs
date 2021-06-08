@@ -6,7 +6,7 @@ use syn::{
 };
 
 // https://github.com/hashicorp/consul/blob/v1.9.5/api/api.go#L80-L169
-#[derive(PartialEq, Eq, Debug)]
+#[derive(PartialEq, Clone)]
 pub enum QueryOptionName {
     Namespace,
     Datacenter,
@@ -50,7 +50,7 @@ impl QueryOptionName {
     }
 }
 
-#[derive(Default)]
+#[derive(Default, Clone)]
 pub struct QueryOptionNames(pub Vec<QueryOptionName>);
 
 impl Parse for QueryOptionNames {

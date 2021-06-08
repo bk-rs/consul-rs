@@ -52,15 +52,17 @@ impl Parse for Input {
                 }
                 k if k == "path_params" => {
                     let v: PathParams = input.parse()?;
-                    for (path_param_name, _) in v.0.iter() {
-                        if !path.contains(format!("{{{}}}", path_param_name).as_str()) {
-                            return Err(SynError::new(
-                                input.span(),
-                                format!("path_params [{}] invalid", path_param_name),
-                            ));
+                    if !v.0.is_empty() {
+                        for (path_param_name, _) in v.0.iter() {
+                            if !path.contains(format!("{{{}}}", path_param_name).as_str()) {
+                                return Err(SynError::new(
+                                    input.span(),
+                                    format!("path_params [{}] invalid", path_param_name),
+                                ));
+                            }
                         }
+                        path_params = Some(v)
                     }
-                    path_params = Some(v);
                     input.parse::<Token![,]>()?;
                 }
                 k if k == "query_option_names" => {

@@ -5,7 +5,7 @@ use syn::{
     Error as SynError, Ident, Token, Type,
 };
 
-#[derive(Default)]
+#[derive(Default, Clone)]
 pub struct PathParams(pub BTreeMap<Ident, Type>);
 
 impl Parse for PathParams {
