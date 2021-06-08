@@ -11,6 +11,7 @@ gen_json_struct_from_file!(
     "MaxAge" => Duration,
     "StaleIfError" => Duration,
     "WaitTime" => Duration,
+    "NodeMeta" => BTreeMap<String, String>,
     "ctx" => (),
 );
 

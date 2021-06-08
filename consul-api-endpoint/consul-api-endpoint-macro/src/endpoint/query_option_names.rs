@@ -27,10 +27,10 @@ pub enum QueryOptionName {
     Filter,
 }
 impl QueryOptionName {
-    pub fn field(&self) -> (&str, TokenStream) {
+    pub fn field(&self) -> (&str, &str, TokenStream) {
         match self {
-            QueryOptionName::Namespace => ("ns", quote!(::std::string::String)),
-            QueryOptionName::Datacenter => todo!(),
+            QueryOptionName::Namespace => ("ns", "namespace", quote!(::std::string::String)),
+            QueryOptionName::Datacenter => ("dc", "datacenter", quote!(::std::string::String)),
             QueryOptionName::AllowStale => todo!(),
             QueryOptionName::RequireConsistent => todo!(),
             QueryOptionName::UseCache => todo!(),
@@ -40,12 +40,16 @@ impl QueryOptionName {
             QueryOptionName::WaitHash => todo!(),
             QueryOptionName::WaitTime => todo!(),
             QueryOptionName::Token => todo!(),
-            QueryOptionName::Near => todo!(),
-            QueryOptionName::NodeMeta => todo!(),
+            QueryOptionName::Near => ("near", "near", quote!(::std::string::String)),
+            QueryOptionName::NodeMeta => (
+                "node_meta",
+                "node_meta",
+                quote!(::std::collections::BTreeMap<String, String>),
+            ),
             QueryOptionName::RelayFactor => todo!(),
             QueryOptionName::LocalOnly => todo!(),
             QueryOptionName::Connect => todo!(),
-            QueryOptionName::Filter => todo!(),
+            QueryOptionName::Filter => ("filter", "filter", quote!(::std::string::String)),
         }
     }
 }

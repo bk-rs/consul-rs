@@ -185,13 +185,14 @@ impl ToTokens for ImplStructParameterFunctions {
     fn to_tokens(&self, tokens: &mut TokenStream) {
         if let Some(query_option_names) = &self.query_option_names {
             for query_option_name in query_option_names.0.iter() {
-                let (field_name, field_type) = query_option_name.field();
+                let (query_name, field_name, field_type) = query_option_name.field();
 
-                let fn_name = format_ident!("set_parameter_{}", field_name);
+                let fn_name = format_ident!("set_parameter_{}", query_name);
+                let field_operator = format_ident!("{}", field_name);
 
                 let token = quote! {
                     pub fn #fn_name(&mut self, val: #field_type) -> &mut Self {
-                        self.query_options.#field_name = val;
+                        self.query_options.#field_operator = val;
                         self
                     }
                 };

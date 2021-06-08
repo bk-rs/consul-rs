@@ -1,7 +1,7 @@
 use std::error;
 
 use consul_api::{
-    api::catalog::{DatacentersEndpoint, NodesEndpoint, ServicesEndpoint},
+    api::catalog::{ListDatacenters, ListNodes, ListServices},
     Client as _,
 };
 
@@ -13,7 +13,7 @@ async fn datacenters() -> Result<(), Box<dyn error::Error>> {
 
     let client = get_client()?;
 
-    let endpoint = DatacentersEndpoint::new();
+    let endpoint = ListDatacenters::new();
     let res = client.respond_endpoint(&endpoint).await?;
 
     println!("datacenters {:?}", res);
@@ -29,7 +29,8 @@ async fn nodes() -> Result<(), Box<dyn error::Error>> {
 
     let client = get_client()?;
 
-    let endpoint = NodesEndpoint::new();
+    let mut endpoint = ListNodes::new();
+    endpoint.set_parameter_dc("dc1".to_string());
     let res = client.respond_endpoint(&endpoint).await?;
 
     println!("nodes {:?}", res);
@@ -43,7 +44,7 @@ async fn services() -> Result<(), Box<dyn error::Error>> {
 
     let client = get_client()?;
 
-    let endpoint = ServicesEndpoint::new();
+    let endpoint = ListServices::new();
     let res = client.respond_endpoint(&endpoint).await?;
 
     println!("services {:?}", res);

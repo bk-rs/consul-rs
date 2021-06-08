@@ -13,6 +13,21 @@ macro_rules! endpoint {
             response_ok_body = $response_ok_body,
         );
     };
+    (
+        $name:ident,
+        $method:expr,
+        $path:literal,
+        { $( $query_option_name:ident ),+ $(,)? },
+        $response_ok_body:ty $(,)?
+    ) => {
+        consul_api_endpoint_macro::endpoint!(
+            name = $name,
+            method = $method,
+            path = $path,
+            query_option_names = $( $query_option_name ),* , ,
+            response_ok_body = $response_ok_body,
+        );
+    };
 
     (
         $name:ident,

@@ -6,8 +6,8 @@ use paste::paste;
 use serde_json::{Map, Value};
 
 // Endpoint State
-// https://github.com/hashicorp/consul/blob/v1.9.5/api/health.go#L349
 // https://www.consul.io/api-docs/health#list-checks-in-state
+// https://github.com/hashicorp/consul/blob/v1.9.5/api/health.go#L349
 endpoint!(
     State,
     ListChecksInState,
