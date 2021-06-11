@@ -31,24 +31,40 @@ impl QueryOptionName {
         match self {
             QueryOptionName::Namespace => ("ns", "namespace", quote!(::std::string::String)),
             QueryOptionName::Datacenter => ("dc", "datacenter", quote!(::std::string::String)),
-            QueryOptionName::AllowStale => todo!(),
-            QueryOptionName::RequireConsistent => todo!(),
-            QueryOptionName::UseCache => todo!(),
-            QueryOptionName::MaxAge => todo!(),
-            QueryOptionName::StaleIfError => todo!(),
-            QueryOptionName::WaitIndex => todo!(),
-            QueryOptionName::WaitHash => todo!(),
-            QueryOptionName::WaitTime => todo!(),
-            QueryOptionName::Token => todo!(),
+            QueryOptionName::AllowStale => {
+                ("stale", "allow_stale", quote!(::core::primitive::bool))
+            }
+            QueryOptionName::RequireConsistent => (
+                "consistent",
+                "require_consistent",
+                quote!(::core::primitive::bool),
+            ),
+            QueryOptionName::UseCache => ("cached", "use_cache", quote!(::core::primitive::bool)),
+            QueryOptionName::MaxAge => ("max_age", "max_age", quote!(::std::time::Duration)),
+            QueryOptionName::StaleIfError => (
+                "stale_if_error",
+                "stale_if_error",
+                quote!(::std::time::Duration),
+            ),
+            QueryOptionName::WaitIndex => ("index", "wait_index", quote!(::core::primitive::u64)),
+            QueryOptionName::WaitHash => ("hash", "wait_hash", quote!(::std::string::String)),
+            QueryOptionName::WaitTime => ("wait", "wait_time", quote!(::std::time::Duration)),
+            QueryOptionName::Token => ("token", "token", quote!(::std::string::String)),
             QueryOptionName::Near => ("near", "near", quote!(::std::string::String)),
             QueryOptionName::NodeMeta => (
                 "node_meta",
                 "node_meta",
                 quote!(::std::collections::BTreeMap<String, String>),
             ),
-            QueryOptionName::RelayFactor => todo!(),
-            QueryOptionName::LocalOnly => todo!(),
-            QueryOptionName::Connect => todo!(),
+            QueryOptionName::RelayFactor => (
+                "relay_factor",
+                "relay_factor",
+                quote!(::core::primitive::u8),
+            ),
+            QueryOptionName::LocalOnly => {
+                ("local_only", "local_only", quote!(::core::primitive::bool))
+            }
+            QueryOptionName::Connect => ("connect", "connect", quote!(::core::primitive::bool)),
             QueryOptionName::Filter => ("filter", "filter", quote!(::std::string::String)),
         }
     }
@@ -78,8 +94,8 @@ impl Parse for QueryOptionNames {
                     QueryOptionName::StaleIfError
                 }
                 s if s == "index" => QueryOptionName::WaitIndex,
-                s if s == "wait" => QueryOptionName::WaitTime,
                 s if s == "hash" => QueryOptionName::WaitHash,
+                s if s == "wait" => QueryOptionName::WaitTime,
                 s if s == "token" => QueryOptionName::Token,
                 s if s == "near" => QueryOptionName::Near,
                 s if s == "node-meta" || s == "node_meta" => QueryOptionName::NodeMeta,
