@@ -22,7 +22,6 @@ consul-api-endpoint = { version = "=0.0.0", path = "../consul-api-endpoint/consu
 consul-api-endpoint-macro = { version = "=0.0.0", path = "../consul-api-endpoint/consul-api-endpoint-macro" }
 
 golang-type = { version = "0.1" }
-paste = { version = "1.0", default-features = false }
 
 url = { version = "2.2", default-features = false }
 http = { version = "0.2", default-features = false }

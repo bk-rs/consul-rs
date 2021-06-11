@@ -329,9 +329,9 @@ impl ToTokens for ImplTraitEndpointPathFunction {
             let path_params: Vec<_> = path_params
                 .0
                 .iter()
-                .map(|(name, ty)| {
+                .map(|(name, _)| {
                     quote! {
-                        #name = #ty,
+                        #name = self.#name,
                     }
                 })
                 .collect();
