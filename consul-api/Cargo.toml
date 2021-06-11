@@ -10,7 +10,7 @@ build = false
 features = ["with-isahc"]
 
 [features]
-# default = ["with-isahc"]
+default = ["with-isahc"]
 
 with-isahc = ["isahc"]
 
