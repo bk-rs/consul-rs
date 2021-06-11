@@ -89,10 +89,8 @@ impl Parse for QueryOptionNames {
                 s if s == "stale" => QueryOptionName::AllowStale,
                 s if s == "consistent" => QueryOptionName::RequireConsistent,
                 s if s == "cached" => QueryOptionName::UseCache,
-                s if s == "max-age" || s == "max_age" => QueryOptionName::MaxAge,
-                s if s == "stale-if-error" || s == "stale_if_error" => {
-                    QueryOptionName::StaleIfError
-                }
+                s if s == "max_age" => QueryOptionName::MaxAge,
+                s if s == "stale_if_error" => QueryOptionName::StaleIfError,
                 s if s == "index" => QueryOptionName::WaitIndex,
                 s if s == "hash" => QueryOptionName::WaitHash,
                 s if s == "wait" => QueryOptionName::WaitTime,
