@@ -1,3 +1,6 @@
+#[cfg(feature = "with-macro")]
+pub use consul_api_endpoint_macro;
+
 use std::collections::BTreeMap;
 
 pub use http::{self, Request, Response};
