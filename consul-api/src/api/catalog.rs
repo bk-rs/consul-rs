@@ -21,7 +21,7 @@ query_endpoint!(
     gen_type!("[]*Node"),
 );
 
-// // Endpoint Nodes
+// // Endpoint Services
 // // https://www.consul.io/api-docs/catalog#list-services
 // // https://github.com/hashicorp/consul/blob/v1.9.5/api/catalog.go#L187
 query_endpoint!(
