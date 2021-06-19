@@ -52,6 +52,14 @@ gen_json_struct_from_file!(
     custom_derive = "Debug, Clone"
 );
 
+// ServiceRegisterOpts
+gen_json_struct_from_file!(
+    "consul-1.9.5/api/agent.go#L270-L275",
+    disable_derive_serde_ser = true,
+    disable_derive_serde_de = true,
+    custom_derive = "Default, Debug, Clone"
+);
+
 // AgentServiceCheck
 gen_json_struct_from_file!(
     "consul-1.9.5/api/agent.go#L288-L319",
