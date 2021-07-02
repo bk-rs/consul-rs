@@ -9,3 +9,7 @@ cargo fmt -- --check
 cargo build-all-features
 cargo test-all-features -- --nocapture
 ```
+
+## Examples
+
+[vkill/consul-api-example](https://github.com/vkill/consul-api-example)
